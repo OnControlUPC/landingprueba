@@ -1037,6 +1037,57 @@ footer {
   transition-delay: 0.4s;
 }
 
+/* Estilos para la sección About */
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    margin-top: 20px;
+}
+
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    align-items: start;
+}
+
+.about-text-content {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-video-container {
+    background-color: var(--card);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.about-video-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Media queries para la sección About */
+@media (max-width: 992px) {
+    .about-section {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .about-content {
+        gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .about-content {
+        gap: 30px;
+    }
+}
+
 /* Animación para la sección de problemática */
 .problem-card {
   transition-delay: 0.1s;
