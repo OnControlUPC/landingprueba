@@ -135,8 +135,8 @@
                             <div class="benefit-text">
                                 <h3>Desafíos en la atención oncológica</h3>
                                 <br>
-                                <p>En Perú, más del 60% de los diagnósticos de cáncer se realizan en etapas avanzadas, lo que complica el tratamiento y reduce las posibilidades de recuperación. Esta situación se ve agravada por la falta de información clara, la desorganización y la poca comunicación durante el proceso oncológico, lo que incrementa la ansiedad tanto en pacientes como en sus familias. 
-                                    <br><br> Al mismo tiempo, los médicos oncólogos enfrentan una sobrecarga laboral, con múltiples pacientes y tratamientos complejos, lo que afecta su desempeño y bienestar profesional.</p>
+                                <p>En Perú, más del 60% de los diagnósticos de cáncer se realizan en etapas avanzadas, lo que complica el tratamiento y reduce las posibilidades de recuperación. Esta situación se ve agravada por la falta de información clara, la desorganización y la poca comunicación durante el proceso oncológico, lo que incrementa la ansiedad tanto en pacientes como en sus familias.
+                                     <br><br> Al mismo tiempo, los médicos oncólogos enfrentan una sobrecarga laboral, con múltiples pacientes y tratamientos complejos, lo que afecta su desempeño y bienestar profesional.</p>
                             </div>
                         </div>
                     </div>
@@ -180,7 +180,7 @@
                             </div>
                         </div>
                     </div>
-                    
+                                        
                     <div class="about-section">
                         <div class="about-text-content">
                             <div class="benefit-item">
@@ -200,7 +200,7 @@
                                 <br>
                             </div>
                             <div class="video-wrapper">
-                                <iframe width="100%" height="315" src="" title="Video sobre Oncontrol Team" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                                <iframe width="100%" height="315" src="https://www.youtube.com/embed/Mtk9u0L_dR4" title="Video sobre Oncontrol Team" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                             </div>
                         </div>
                     </div>
@@ -272,23 +272,23 @@
                 </form>
             </div>
         </section>
-     
-       <section id="app-download">
-        <h2 class="section-title">Descarga Nuestra App</h2>
+
+        <section id="app-download">
+            <h2 class="section-title">Descarga Nuestra App</h2>
             <div class="container">
                 <div class="app-download-card">
                     <div class="app-download-content">
                         <h2>Lleva el control de tu tratamiento donde vayas</h2>
                         <p>Descarga nuestra aplicación y accede a todas las funcionalidades de OnControl desde tu dispositivo móvil. Disponible para iOS y Android.</p>
                         <div class="app-download-buttons">
-                            <a href="#app-download" class="app-store-button">
+                            <a href="https://appdistribution.firebase.google.com/testerapps/1:363072497868:android:8fdcbec250c0bea05c3a69/releases/020ukocmq2klo?utm_source=firebase-console " class="app-store-button">
                                 <i class="fab fa-apple"></i>
-                                <span>   
-                                    <small>Descargar en</small>
+                                <span>
+                                       <small>Descargar en</small>
                                     App Store
                                 </span>
                             </a>
-                            <a href="#app-download" class="play-store-button">
+                            <a href="https://appdistribution.firebase.google.com/testerapps/1:363072497868:android:8fdcbec250c0bea05c3a69/releases/020ukocmq2klo?utm_source=firebase-console " class="play-store-button">
                                 <i class="fab fa-google-play"></i>
                                 <span>
                                     <small>Disponible en</small>
@@ -304,9 +304,8 @@
                 </div>
             </div>
         </section>
-        
     </main>
-        
+
     <footer>
         <div class="footer-content">
             <div class="footer-logo">
@@ -343,11 +342,81 @@
         <div class="footer-bottom">
             <p>&copy; 2025 OnControl. Todos los derechos reservados.</p>
             <div class="footer-legal">
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Términos y Condiciones</a>
+                <a href="#" id="privacy-link">Política de Privacidad</a>
+                <a href="#" id="terms-link">Términos y Condiciones</a>
             </div>
         </div>
     </footer>
+
+    <!-- Modal de Política de Privacidad -->
+    <div id="privacy-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-shield-alt"></i> Política de Privacidad</h2>
+                <span class="close" id="privacy-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="privacy-section">
+                    <h3><i class="fas fa-lock"></i> Protección de Datos</h3>
+                    <p>En OnControl, tu privacidad es nuestra prioridad. <strong>No almacenamos información sensible</strong> como datos bancarios, contraseñas sin cifrar o información médica detallada en servidores externos.</p>
+                </div>
+                
+                <div class="privacy-section">
+                    <h3><i class="fas fa-database"></i> Información que Recopilamos</h3>
+                    <ul>
+                        <li>Datos básicos de contacto (nombre, email, teléfono)</li>
+                        <li>Información de uso de la aplicación para mejorar el servicio</li>
+                        <li>Datos médicos básicos necesarios para el funcionamiento de la app</li>
+                    </ul>
+                </div>
+
+                <div class="privacy-section">
+                    <h3><i class="fas fa-user-shield"></i> Tu Seguridad</h3>
+                    <p>Utilizamos encriptación de extremo a extremo y cumplimos con estándares internacionales de seguridad médica. Tus datos están protegidos y solo tú y tu médico autorizado pueden acceder a ellos.</p>
+                </div>
+
+                <div class="privacy-section">
+                    <h3><i class="fas fa-trash-alt"></i> Control de tus Datos</h3>
+                    <p>Puedes solicitar la eliminación completa de tus datos en cualquier momento contactándonos a <strong>privacidad@oncontrol.pe</strong></p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Términos y Condiciones -->
+    <div id="terms-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-file-contract"></i> Términos y Condiciones</h2>
+                <span class="close" id="terms-close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="terms-section">
+                    <h3><i class="fas fa-info-circle"></i> Uso de la Aplicación</h3>
+                    <p>OnControl es una herramienta de apoyo para pacientes oncológicos. <strong>No reemplaza la consulta médica profesional</strong> y debe usarse como complemento al tratamiento médico.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3><i class="fas fa-shield-alt"></i> Privacidad y Seguridad</h3>
+                    <p>Nos comprometemos a <strong>no vender, compartir o distribuir tu información personal</strong> a terceros sin tu consentimiento explícito. Tu información médica permanece confidencial.</p>
+                </div>
+
+                <div class="terms-section">
+                    <h3><i class="fas fa-user-md"></i> Responsabilidades</h3>
+                    <ul>
+                        <li>La información proporcionada debe ser veraz y actualizada</li>
+                        <li>El usuario es responsable de mantener seguras sus credenciales</li>
+                        <li>Cualquier emergencia médica debe ser atendida inmediatamente por profesionales</li>
+                    </ul>
+                </div>
+
+                <div class="terms-section">
+                    <h3><i class="fas fa-phone"></i> Soporte</h3>
+                    <p>Para dudas sobre estos términos, contáctanos en <strong>legal@oncontrol.pe</strong> o al +51 (01) 610-5030</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <script src="./scripts/main-scripts.js"></script>
 </body>

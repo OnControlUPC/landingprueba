@@ -801,10 +801,165 @@ footer {
   text-decoration: none;
   font-size: 0.9rem;
   transition: color 0.3s ease;
+  cursor: pointer;
 }
 
 .footer-legal a:hover {
   color: var(--accent);
+}
+
+/* Estilos para los modales */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(5px);
+  animation: fadeIn 0.3s ease;
+}
+
+.modal.show {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-content {
+  background-color: var(--card);
+  border-radius: 15px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  animation: slideIn 0.3s ease;
+  position: relative;
+}
+
+.modal-header {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 25px 30px;
+  border-radius: 15px 15px 0 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal-header i {
+  color: var(--accent);
+}
+
+.close {
+  color: white;
+  font-size: 2rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease, transform 0.3s ease;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.close:hover {
+  color: var(--accent);
+  transform: scale(1.1);
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.modal-body {
+  padding: 30px;
+  line-height: 1.7;
+}
+
+.privacy-section,
+.terms-section {
+  margin-bottom: 25px;
+  padding: 20px;
+  background-color: rgba(0, 121, 107, 0.05);
+  border-radius: 10px;
+  border-left: 4px solid var(--primary);
+}
+
+.privacy-section:last-child,
+.terms-section:last-child {
+  margin-bottom: 0;
+}
+
+.privacy-section h3,
+.terms-section h3 {
+  color: var(--primary);
+  margin-bottom: 15px;
+  font-size: 1.3rem;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.privacy-section h3 i,
+.terms-section h3 i {
+  color: var(--accent);
+  font-size: 1.2rem;
+}
+
+.privacy-section p,
+.terms-section p {
+  margin-bottom: 10px;
+  color: var(--foreground);
+}
+
+.privacy-section ul,
+.terms-section ul {
+  margin-left: 20px;
+  color: var(--foreground);
+}
+
+.privacy-section li,
+.terms-section li {
+  margin-bottom: 8px;
+}
+
+.privacy-section strong,
+.terms-section strong {
+  color: var(--primary);
+  font-weight: 600;
+}
+
+/* Animaciones para los modales */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 /* Media queries para responsividad */
@@ -813,11 +968,9 @@ footer {
   header {
     padding: 15px 0;
   }
-
   nav.container {
     position: relative;
   }
-
   .nav-toggle-label {
     display: block;
     position: absolute;
@@ -829,7 +982,6 @@ footer {
     padding: 8px;
     border-radius: 4px;
   }
-
   .nav-links {
     position: absolute;
     top: 100%;
@@ -848,40 +1000,33 @@ footer {
     opacity: 0;
     visibility: hidden;
   }
-
   .nav-toggle:checked ~ .nav-links {
     height: auto;
     padding: 20px 0;
     opacity: 1;
     visibility: visible;
   }
-
   .nav-links li {
     margin: 12px 0;
     width: 100%;
     text-align: center;
   }
-
   .nav-links li a {
     display: block;
     padding: 12px;
     font-size: 1.1rem;
   }
-
   /* Ajustes para la sección de app download */
   .app-download-card {
     padding: 30px 20px;
   }
-
   .app-download-content h2 {
     font-size: 2rem;
   }
-
   .app-download-content p {
     font-size: 1rem;
     margin-bottom: 30px;
   }
-
   /* Ajustes para la sección de problemática */
   .problem-content {
     grid-template-columns: 1fr;
@@ -894,61 +1039,50 @@ footer {
     padding: 120px 0 60px;
     clip-path: polygon(0 0, 100% 0, 100% 92%, 0% 100%);
   }
-
   .hero-content {
     flex-direction: column;
     text-align: center;
     padding: 0;
   }
-
   .hero-text {
     order: 1;
     padding: 0 20px;
     margin-bottom: 30px;
   }
-
   .hero-image {
     order: 0;
     margin-bottom: 30px;
     padding: 0 20px;
   }
-
   .hero-text h1 {
     font-size: 2rem;
     margin-bottom: 15px;
     line-height: 1.2;
   }
-
   .hero-text p {
     font-size: 1rem;
     margin-bottom: 25px;
   }
-
   .hero-buttons {
     justify-content: center;
   }
-
   /* Ajustes para las secciones de características y beneficios */
   .features-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
   .benefits-grid {
     grid-template-columns: 1fr;
     gap: 20px;
   }
-
   .feature-card,
   .benefit-item {
     padding: 25px;
   }
-
   .section-title {
     font-size: 2rem;
     margin-bottom: 30px;
   }
-
   #features,
   #benefits,
   #testimonials,
@@ -958,50 +1092,65 @@ footer {
   #app-download {
     padding: 60px 0;
   }
-
   /* Ajustes para la sección de ubicación */
   .location-container {
     grid-template-columns: 1fr;
   }
-
   .map-card {
     min-height: 300px;
   }
-
   /* Ajustes para el footer */
   .footer-content {
     flex-direction: column;
   }
-
   .footer-links {
     flex-direction: column;
     gap: 20px;
   }
-
   .footer-bottom {
     flex-direction: column;
     text-align: center;
   }
-
   .footer-legal {
     margin-top: 10px;
     justify-content: center;
   }
-
   /* Ajustes para los elementos de beneficio */
   .benefit-item {
     flex-direction: column;
     text-align: center;
   }
-
   .benefit-icon {
     margin-right: 0;
     margin-bottom: 15px;
   }
-
   /* Ajustes generales */
   .container {
     padding: 0 15px;
+  }
+
+  /* Ajustes para modales en móvil */
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+
+  .modal-header {
+    padding: 20px;
+  }
+
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .modal-body {
+    padding: 20px;
+  }
+
+  .privacy-section,
+  .terms-section {
+    padding: 15px;
+    margin-bottom: 20px;
   }
 }
 
@@ -1039,53 +1188,53 @@ footer {
 
 /* Estilos para la sección About */
 .about-content {
-    display: flex;
-    flex-direction: column;
-    gap: 60px;
-    margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  margin-top: 20px;
 }
 
 .about-section {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 30px;
-    align-items: start;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+  align-items: start;
 }
 
 .about-text-content {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .about-video-container {
-    background-color: var(--card);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--card);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .about-video-container:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
 }
 
 /* Media queries para la sección About */
 @media (max-width: 992px) {
-    .about-section {
-        grid-template-columns: 1fr;
-        gap: 20px;
-    }
-    
-    .about-content {
-        gap: 40px;
-    }
+  .about-section {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .about-content {
+    gap: 40px;
+  }
 }
 
 @media (max-width: 768px) {
-    .about-content {
-        gap: 30px;
-    }
+  .about-content {
+    gap: 30px;
+  }
 }
 
 /* Animación para la sección de problemática */
@@ -1111,75 +1260,76 @@ footer {
   .logo span {
     font-size: 1.2rem;
   }
-
   .logo img {
     width: 30px;
   }
-
   .hero-text h1 {
     font-size: 1.8rem;
   }
-
   .hero-image img {
     max-width: 100%;
   }
-
   .cta-button {
     padding: 10px 20px;
     font-size: 0.9rem;
   }
-
   .feature-icon,
   .benefit-icon {
     font-size: 2rem;
     margin-bottom: 15px;
   }
-
   .feature-card h3,
   .benefit-text h3 {
     font-size: 1.2rem;
   }
-
   .location-header h3 {
     font-size: 1.5rem;
   }
-
   .detail-icon {
     width: 40px;
     height: 40px;
   }
-
   .app-button {
     width: 100%;
     justify-content: center;
   }
-
   /* Ajustes para la sección de app download en móviles */
   .app-download-buttons {
     flex-direction: column;
     align-items: center;
   }
-
   .app-store-button,
   .play-store-button {
     width: 100%;
     justify-content: center;
   }
-
   .app-download-content h2 {
     font-size: 1.8rem;
   }
-
   .app-download-logo {
     margin-top: 30px;
   }
-
   .app-download-logo img {
     width: 60px;
     height: 60px;
   }
-
   .app-download-logo span {
     font-size: 1.2rem;
+  }
+
+  /* Ajustes adicionales para modales en pantallas muy pequeñas */
+  .modal-header h2 {
+    font-size: 1.3rem;
+  }
+
+  .close {
+    font-size: 1.5rem;
+    width: 35px;
+    height: 35px;
+  }
+
+  .privacy-section h3,
+  .terms-section h3 {
+    font-size: 1.1rem;
   }
 }

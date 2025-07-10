@@ -1,189 +1,263 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Animación al hacer scroll
-    const animateElements = document.querySelectorAll(
-      ".feature-card, .benefit-item, .problem-card, .problem-video-container, .map-card, .info-card, .app-download-container",
-    )
-  
+  // Animación al hacer scroll
+  const animateElements = document.querySelectorAll(
+    ".feature-card, .benefit-item, .problem-card, .problem-video-container, .map-card, .info-card, .app-download-container",
+  )
+
+  animateElements.forEach((element) => {
+    element.classList.add("will-animate")
+  })
+
+  function checkIfInView() {
+    const windowHeight = window.innerHeight
+    const windowTopPosition = window.scrollY
+    const windowBottomPosition = windowTopPosition + windowHeight
+
     animateElements.forEach((element) => {
-      element.classList.add("will-animate")
+      const elementHeight = element.offsetHeight
+      const elementTopPosition = element.offsetTop
+      const elementBottomPosition = elementTopPosition + elementHeight
+
+      if (elementBottomPosition >= windowTopPosition && elementTopPosition <= windowBottomPosition) {
+        element.classList.add("animate")
+      }
     })
-  
-    function checkIfInView() {
-      const windowHeight = window.innerHeight
-      const windowTopPosition = window.scrollY
-      const windowBottomPosition = windowTopPosition + windowHeight
-  
-      animateElements.forEach((element) => {
-        const elementHeight = element.offsetHeight
-        const elementTopPosition = element.offsetTop
-        const elementBottomPosition = elementTopPosition + elementHeight
-  
-        if (elementBottomPosition >= windowTopPosition && elementTopPosition <= windowBottomPosition) {
-          element.classList.add("animate")
+  }
+
+  window.addEventListener("scroll", checkIfInView)
+  window.addEventListener("resize", checkIfInView)
+
+  // Trigger once on load
+  setTimeout(checkIfInView, 100)
+
+  // Navegación de testimonios
+  const testimonialSlides = document.querySelectorAll(".testimonial-slide")
+  const testimonialNav = document.querySelector(".testimonial-nav")
+
+  if (testimonialSlides.length > 0 && testimonialNav) {
+    testimonialSlides.forEach((_, index) => {
+      const button = document.createElement("button")
+      button.setAttribute("aria-label", `Ver testimonio ${index + 1}`)
+      if (index === 0) button.classList.add("active")
+
+      button.addEventListener("click", () => {
+        document.querySelectorAll(".testimonial-nav button").forEach((btn) => btn.classList.remove("active"))
+        button.classList.add("active")
+
+        const testimonialSlider = document.querySelector(".testimonial-slider")
+        if (testimonialSlider) {
+          testimonialSlider.scrollTo({
+            left: testimonialSlides[index].offsetLeft,
+            behavior: "smooth",
+          })
+        }
+      })
+
+      testimonialNav.appendChild(button)
+    })
+  }
+
+  // Formulario de contacto
+  const contactForm = document.querySelector(".contact-form")
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault()
+
+      // Aquí iría la lógica para enviar el formulario
+      alert("¡Gracias por contactarnos! Te responderemos a la brevedad.")
+      contactForm.reset()
+    })
+  }
+})
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Menú móvil responsive
+  const navToggle = document.getElementById("nav-toggle")
+  const navLinks = document.querySelectorAll(".nav-links a")
+
+  // Cerrar el menú cuando se hace clic en un enlace
+  navLinks.forEach((link) => {
+    link.addEventListener("click", () => {
+      navToggle.checked = false
+    })
+  })
+
+  // Asegurarse de que el menú se muestre correctamente
+  const navToggleLabel = document.querySelector(".nav-toggle-label")
+  if (navToggleLabel) {
+    navToggleLabel.addEventListener("click", (e) => {
+      e.stopPropagation()
+    })
+  }
+
+  // Testimonial slider
+  const slider = document.querySelector(".testimonial-slider")
+  const slides = document.querySelectorAll(".testimonial-slide")
+  const testimonialNav = document.querySelector(".testimonial-nav")
+  let currentSlide = 0
+
+  // Crear botones de navegación para testimonios
+  if (slider && testimonialNav && slides.length > 0) {
+    // Limpiar cualquier botón existente
+    testimonialNav.innerHTML = ""
+
+    // Crear botones para cada slide
+    slides.forEach((_, index) => {
+      const button = document.createElement("button")
+      button.setAttribute("aria-label", `Ver testimonio ${index + 1}`)
+      if (index === 0) button.classList.add("active")
+
+      button.addEventListener("click", () => {
+        goToSlide(index)
+      })
+
+      testimonialNav.appendChild(button)
+    })
+
+    // Función para ir a un slide específico
+    function goToSlide(n) {
+      currentSlide = (n + slides.length) % slides.length
+      const offset = slides[currentSlide].offsetLeft
+      slider.scrollTo({
+        left: offset,
+        behavior: "smooth",
+      })
+
+      // Actualizar botón activo
+      document.querySelectorAll(".testimonial-nav button").forEach((btn, i) => {
+        if (i === currentSlide) {
+          btn.classList.add("active")
+        } else {
+          btn.classList.remove("active")
         }
       })
     }
-  
-    window.addEventListener("scroll", checkIfInView)
-    window.addEventListener("resize", checkIfInView)
-  
-    // Trigger once on load
-    setTimeout(checkIfInView, 100)
-  
-    // Navegación de testimonios
-    const testimonialSlides = document.querySelectorAll(".testimonial-slide")
-    const testimonialNav = document.querySelector(".testimonial-nav")
-  
-    if (testimonialSlides.length > 0 && testimonialNav) {
-      testimonialSlides.forEach((_, index) => {
-        const button = document.createElement("button")
-        button.setAttribute("aria-label", `Ver testimonio ${index + 1}`)
-        if (index === 0) button.classList.add("active")
-  
-        button.addEventListener("click", () => {
-          document.querySelectorAll(".testimonial-nav button").forEach((btn) => btn.classList.remove("active"))
-          button.classList.add("active")
-  
-          const testimonialSlider = document.querySelector(".testimonial-slider")
-          if (testimonialSlider) {
-            testimonialSlider.scrollTo({
-              left: testimonialSlides[index].offsetLeft,
-              behavior: "smooth",
-            })
+
+    // Detectar cambio de testimonio al desplazarse
+    slider.addEventListener("scroll", () => {
+      const index = Math.round(slider.scrollLeft / slider.clientWidth)
+      if (index !== currentSlide) {
+        currentSlide = index
+        document.querySelectorAll(".testimonial-nav button").forEach((btn, i) => {
+          if (i === currentSlide) {
+            btn.classList.add("active")
+          } else {
+            btn.classList.remove("active")
           }
         })
-  
-        testimonialNav.appendChild(button)
+      }
+    })
+  }
+
+  // Intersection Observer para animaciones
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("animate")
+        }
       })
+    },
+    { threshold: 0.1 },
+  )
+
+  document
+    .querySelectorAll(".feature-card, .benefit-item, .location-card, .problem-card, .problem-video-container")
+    .forEach((el) => {
+      observer.observe(el)
+      // Añadir clase para preparar la animación
+      el.classList.add("will-animate")
+    })
+
+  // Smooth scrolling para enlaces de anclaje
+  document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+    anchor.addEventListener("click", function (e) {
+      const targetId = this.getAttribute("href")
+      if (targetId === "#") return // Ignorar enlaces al inicio de la página
+
+      e.preventDefault()
+      const targetElement = document.querySelector(targetId)
+
+      if (targetElement) {
+        // Ajustar el desplazamiento para tener en cuenta el header fijo
+        const headerHeight = document.querySelector("header").offsetHeight
+        const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight
+
+        window.scrollTo({
+          top: targetPosition,
+          behavior: "smooth",
+        })
+      }
+    })
+  })
+
+  // Funcionalidad de modales
+  const privacyLink = document.getElementById("privacy-link")
+  const termsLink = document.getElementById("terms-link")
+  const privacyModal = document.getElementById("privacy-modal")
+  const termsModal = document.getElementById("terms-modal")
+  const privacyClose = document.getElementById("privacy-close")
+  const termsClose = document.getElementById("terms-close")
+
+  // Función para abrir modal
+  function openModal(modal) {
+    modal.classList.add("show")
+    document.body.style.overflow = "hidden" // Prevenir scroll del body
+  }
+
+  // Función para cerrar modal
+  function closeModal(modal) {
+    modal.classList.remove("show")
+    document.body.style.overflow = "auto" // Restaurar scroll del body
+  }
+
+  // Event listeners para abrir modales
+  if (privacyLink && privacyModal) {
+    privacyLink.addEventListener("click", (e) => {
+      e.preventDefault()
+      openModal(privacyModal)
+    })
+  }
+
+  if (termsLink && termsModal) {
+    termsLink.addEventListener("click", (e) => {
+      e.preventDefault()
+      openModal(termsModal)
+    })
+  }
+
+  // Event listeners para cerrar modales
+  if (privacyClose && privacyModal) {
+    privacyClose.addEventListener("click", () => {
+      closeModal(privacyModal)
+    })
+  }
+
+  if (termsClose && termsModal) {
+    termsClose.addEventListener("click", () => {
+      closeModal(termsModal)
+    })
+  }
+
+  // Cerrar modal al hacer clic fuera del contenido
+  window.addEventListener("click", (e) => {
+    if (e.target === privacyModal) {
+      closeModal(privacyModal)
     }
-  
-    // Formulario de contacto
-    const contactForm = document.querySelector(".contact-form")
-    if (contactForm) {
-      contactForm.addEventListener("submit", (e) => {
-        e.preventDefault()
-  
-        // Aquí iría la lógica para enviar el formulario
-        alert("¡Gracias por contactarnos! Te responderemos a la brevedad.")
-        contactForm.reset()
-      })
+    if (e.target === termsModal) {
+      closeModal(termsModal)
     }
   })
-  
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Menú móvil responsive
-    const navToggle = document.getElementById('nav-toggle');
-    const navLinks = document.querySelectorAll('.nav-links a');
-    
-    // Cerrar el menú cuando se hace clic en un enlace
-    navLinks.forEach(link => {
-        link.addEventListener('click', () => {
-            navToggle.checked = false;
-        });
-    });
-    
-    // Asegurarse de que el menú se muestre correctamente
-    const navToggleLabel = document.querySelector('.nav-toggle-label');
-    if (navToggleLabel) {
-        navToggleLabel.addEventListener('click', function(e) {
-            e.stopPropagation();
-        });
+  // Cerrar modal con la tecla Escape
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      if (privacyModal && privacyModal.classList.contains("show")) {
+        closeModal(privacyModal)
+      }
+      if (termsModal && termsModal.classList.contains("show")) {
+        closeModal(termsModal)
+      }
     }
-
-    // Testimonial slider
-    const slider = document.querySelector('.testimonial-slider');
-    const slides = document.querySelectorAll('.testimonial-slide');
-    const testimonialNav = document.querySelector('.testimonial-nav');
-    let currentSlide = 0;
-
-    // Crear botones de navegación para testimonios
-    if (slider && testimonialNav && slides.length > 0) {
-        // Limpiar cualquier botón existente
-        testimonialNav.innerHTML = '';
-        
-        // Crear botones para cada slide
-        slides.forEach((_, index) => {
-            const button = document.createElement('button');
-            button.setAttribute('aria-label', `Ver testimonio ${index + 1}`);
-            if (index === 0) button.classList.add('active');
-            
-            button.addEventListener('click', () => {
-                goToSlide(index);
-            });
-            
-            testimonialNav.appendChild(button);
-        });
-        
-        // Función para ir a un slide específico
-        function goToSlide(n) {
-            currentSlide = (n + slides.length) % slides.length;
-            const offset = slides[currentSlide].offsetLeft;
-            slider.scrollTo({
-                left: offset,
-                behavior: 'smooth'
-            });
-            
-            // Actualizar botón activo
-            document.querySelectorAll('.testimonial-nav button').forEach((btn, i) => {
-                if (i === currentSlide) {
-                    btn.classList.add('active');
-                } else {
-                    btn.classList.remove('active');
-                }
-            });
-        }
-        
-        // Detectar cambio de testimonio al desplazarse
-        slider.addEventListener('scroll', () => {
-            const index = Math.round(slider.scrollLeft / slider.clientWidth);
-            if (index !== currentSlide) {
-                currentSlide = index;
-                document.querySelectorAll('.testimonial-nav button').forEach((btn, i) => {
-                    if (i === currentSlide) {
-                        btn.classList.add('active');
-                    } else {
-                        btn.classList.remove('active');
-                    }
-                });
-            }
-        });
-    }
-
-    // Intersection Observer para animaciones
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate');
-            }
-        });
-    }, { threshold: 0.1 });
-
-    document.querySelectorAll('.feature-card, .benefit-item, .location-card, .problem-card, .problem-video-container').forEach(el => {
-        observer.observe(el);
-        // Añadir clase para preparar la animación
-        el.classList.add('will-animate');
-    });
-
-    // Smooth scrolling para enlaces de anclaje
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            const targetId = this.getAttribute('href');
-            if (targetId === '#') return; // Ignorar enlaces al inicio de la página
-            
-            e.preventDefault();
-            const targetElement = document.querySelector(targetId);
-            
-            if (targetElement) {
-                // Ajustar el desplazamiento para tener en cuenta el header fijo
-                const headerHeight = document.querySelector('header').offsetHeight;
-                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - headerHeight;
-                
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-});
+  })
+})
